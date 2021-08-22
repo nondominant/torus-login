@@ -48,9 +48,6 @@ function App() {
 		Test
             </button>
 		{test && <div><strong>Ethereum network Address</strong>: {ethAddress}</div>}
-		{test &&<div><strong>solana cluster connection</strong>: {connection} </div>}
-		{test &&<div><strong>solana Wallet info</strong>: {solanaWallet}</div>}
-		{test &&<div><strong>solana Account info</strong>: {solanaAccount}</div>}
 	   </div>
         ) : (
           <>
