@@ -7,8 +7,20 @@ import {login} from "./login.js";
 
 function App() {
   const [account, setAccount] = useState();
+  const [wallet, setWallet] = useState();
+  const [ethAddress, setEthAddress] = useState();
+  const [connection, setCluster] = useState();
+  const [solanaWallet, setSolanaWallet] = useState();
+  const [solanaAccount, setSolanaAccount] = useState();
 
-  const onClickLogin = login(setAccount); 
+  const onClickLogin = login(
+	  setAccount,
+	  setWallet,
+	  setEthAddress,
+	  setCluster,
+	  setSolanaWallet,
+	  setSolanaAccount
+  ); 
 
   return (
     <div className="App">
