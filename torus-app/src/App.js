@@ -47,7 +47,7 @@ function App() {
             <button className="Test" onClick={testfunction}>
 		Test
             </button>
-		{test && <div><strong>Ethereum network Address</strong>: {ethAddress}</div>}
+		{test && <div><strong>Cluster</strong>: {solanaWallet.publicKey}</div>}
 	   </div>
         ) : (
           <>

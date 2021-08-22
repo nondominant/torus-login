@@ -21,28 +21,40 @@ export async function login(
     const web3 = new Web3(torus.provider);
     const address = (await web3.eth.getAccounts())[0];
     const balance = await web3.eth.getBalance(address);
+	//debug
+	console.log("address: " + address);
 
 
 	var connection = new solanaWeb3.Connection(
 	solanaWeb3.clusterApiUrl('devnet'),
 	'confirmed',
 	);
+
+	//debug
+	console.log("connection: " + );
+
 	var wallet = solanaWeb3.Keypair.generate();
+	//debug
+	console.log("wallet: " + JSON.stringify(wallet));
 	var airdropSignature = await connection.requestAirdrop(
 	wallet.publicKey,
 	solanaWeb3.LAMPORTS_PER_SOL,
 	);
+	//debug
+	console.log("airdrop signature: " + airdropSignature);
 	await connection.confirmTransaction(airdropSignature);
 	// get account info
 	// account data is bytecode that needs to be deserialized
 	// serialization and deserialization is program specic
 	let account = await connection.getAccountInfo(wallet.publicKey);
+	//debug
+	console.log("account: " + JSON.stringify(account));
 
     setAccount({ address, balance });
-    setEthAddress(address);
-    setCluster(connection);
-    setSolanaWallet(wallet);
-    setSolanaAccount(account);
+    setEthAddress({address});
+    setCluster(5);
+    setSolanaWallet({wallet});
+    setSolanaAccount({account});
 };
 
 
