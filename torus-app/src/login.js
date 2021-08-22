@@ -4,13 +4,15 @@ import Web3 from "web3";
 import wordmark from "./logo.svg";
 import * as solanaWeb3 from '@solana/web3.js';
 import "./App.css";
+import { testMint } from "./mint.js";
 
 export async function login(
 	setAccount,
 	setEthAddress,
 	setCluster,
 	setSolanaWallet,
-	setSolanaAccount
+	setSolanaAccount,
+	setSignature
 ) {
 //e.preventDefault();
     const torus = new Torus({});
@@ -30,31 +32,27 @@ export async function login(
 	'confirmed',
 	);
 
-	//debug
-	console.log("connection: " + );
 
 	var wallet = solanaWeb3.Keypair.generate();
-	//debug
-	console.log("wallet: " + JSON.stringify(wallet));
 	var airdropSignature = await connection.requestAirdrop(
 	wallet.publicKey,
 	solanaWeb3.LAMPORTS_PER_SOL,
 	);
 	//debug
-	console.log("airdrop signature: " + airdropSignature);
 	await connection.confirmTransaction(airdropSignature);
 	// get account info
 	// account data is bytecode that needs to be deserialized
 	// serialization and deserialization is program specic
 	let account = await connection.getAccountInfo(wallet.publicKey);
 	//debug
-	console.log("account: " + JSON.stringify(account));
 
     setAccount({ address, balance });
     setEthAddress({address});
     setCluster(5);
     setSolanaWallet({wallet});
     setSolanaAccount({account});
+testMint(setSignature);//lets see if this works
+
 };
 
 

@@ -13,6 +13,7 @@ function App() {
   const [connection, setCluster] = useState();
   const [solanaWallet, setSolanaWallet] = useState();
   const [solanaAccount, setSolanaAccount] = useState();
+  const [TXsignature, setSignature] = useState();
   const [visible, setVisible] = useState(true);
   const [test, setTest] = useState(false);
 
@@ -24,7 +25,8 @@ function App() {
 	  setEthAddress,
 	  setCluster,
 	  setSolanaWallet,
-	  setSolanaAccount
+	  setSolanaAccount,
+	  setSignature
 	); 
   }; 
 
@@ -47,7 +49,7 @@ function App() {
             <button className="Test" onClick={testfunction}>
 		Test
             </button>
-		{test && <div><strong>Cluster</strong>: {solanaWallet.publicKey}</div>}
+		{test && <div><strong>TX signature</strong>: {TXsignature}</div>}
 	   </div>
         ) : (
           <>
