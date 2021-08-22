@@ -4,6 +4,7 @@ import Web3 from "web3";
 import wordmark from "./logo.svg";
 import "./App.css";
 import {login} from "./login.js";
+import About from "./About.js";
 
 function App() {
 //each state hook returns a pair, [0] is the variable, [1] is the 
@@ -14,6 +15,7 @@ function App() {
   const [solanaWallet, setSolanaWallet] = useState();
   const [solanaAccount, setSolanaAccount] = useState();
   const [visible, setVisible] = useState(true);
+  const [dummy, setDummy] = useState(false);
 
   const onClickLogin = async () => {
         setVisible(!visible);
@@ -24,9 +26,11 @@ function App() {
 	  setSolanaWallet,
 	  setSolanaAccount
 	); 
+	setDummy(true);
   }; 
 
   return (
+<Router>
     <div className="App">
       <header className="App-header">
         <img src={wordmark} className="App-logo" alt="logo" />
@@ -45,10 +49,13 @@ function App() {
             <button className="App-link" onClick={onClickLogin}>
 		{visible && <div>Login</div>}
             </button>
+		{dummy && <Link to={'/about'} className="nav-link">About</Link>}
           </>
         )}
       </header>
+	  <Route path='/about' component={About} />
     </div>
+</Router>
   );
 }
 
