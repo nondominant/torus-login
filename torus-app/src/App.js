@@ -3,24 +3,12 @@ import Torus from "@toruslabs/torus-embed";
 import Web3 from "web3";
 import wordmark from "./logo.svg";
 import "./App.css";
+import {login} from "./login.js";
 
 function App() {
   const [account, setAccount] = useState();
 
-  const onClickLogin = async (e) => {
-    e.preventDefault();
-
-    const torus = new Torus({});
-    await torus.init({
-      enableLogging: false,
-    });
-    await torus.login();
-
-    const web3 = new Web3(torus.provider);
-    const address = (await web3.eth.getAccounts())[0];
-    const balance = await web3.eth.getBalance(address);
-    setAccount({ address, balance });
-  };
+  const onClickLogin = login(); 
 
   return (
     <div className="App">
