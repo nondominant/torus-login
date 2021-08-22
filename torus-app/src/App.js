@@ -8,7 +8,7 @@ import {login} from "./login.js";
 function App() {
   const [account, setAccount] = useState();
 
-  const onClickLogin = login(account, setAccount, e); 
+  const onClickLogin = login(setAccount); 
 
   return (
     <div className="App">

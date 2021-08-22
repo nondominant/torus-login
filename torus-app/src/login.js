@@ -4,8 +4,8 @@ import Web3 from "web3";
 import wordmark from "./logo.svg";
 import "./App.css";
 
-export async function login(account, setAccount, e) {
-e.preventDefault();
+export async function login(setAccount) {
+//e.preventDefault();
 
 //This is a highly configured way to instantiate a torus login
 const torus = new Torus({
