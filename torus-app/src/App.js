@@ -6,21 +6,25 @@ import "./App.css";
 import {login} from "./login.js";
 
 function App() {
+//each state hook returns a pair, [0] is the variable, [1] is the 
+//function used to update the variable
   const [account, setAccount] = useState();
-  const [wallet, setWallet] = useState();
   const [ethAddress, setEthAddress] = useState();
   const [connection, setCluster] = useState();
   const [solanaWallet, setSolanaWallet] = useState();
   const [solanaAccount, setSolanaAccount] = useState();
+  const [visible, setVisible] = useState(true);
 
-  const onClickLogin = login(
+  const onClickLogin = async () => {
+        setVisible(!visible);
+	await login(
 	  setAccount,
-	  setWallet,
 	  setEthAddress,
 	  setCluster,
 	  setSolanaWallet,
 	  setSolanaAccount
-  ); 
+	); 
+  }; 
 
   return (
     <div className="App">
@@ -39,7 +43,7 @@ function App() {
           <>
             <p>You didn't login yet. Login to see your account details.</p>
             <button className="App-link" onClick={onClickLogin}>
-              Login
+		{visible && <div>Login</div>}
             </button>
           </>
         )}
@@ -49,3 +53,4 @@ function App() {
 }
 
 export default App;
+

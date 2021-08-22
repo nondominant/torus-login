@@ -5,46 +5,45 @@ import wordmark from "./logo.svg";
 import * as solanaWeb3 from '@solana/web3.js';
 import "./App.css";
 
-export async function login(setAccount) {
+export async function login(
+	setAccount,
+	setEthAddress,
+	setCluster,
+	setSolanaWallet,
+	setSolanaAccount
+) {
 //e.preventDefault();
     const torus = new Torus({});
     await torus.init({
       enableLogging: false,
     });
-
     await torus.login();
-
     const web3 = new Web3(torus.provider);
     const address = (await web3.eth.getAccounts())[0];
     const balance = await web3.eth.getBalance(address);
+
+
+	var connection = new solanaWeb3.Connection(
+	solanaWeb3.clusterApiUrl('devnet'),
+	'confirmed',
+	);
+	var wallet = solanaWeb3.Keypair.generate();
+	var airdropSignature = await connection.requestAirdrop(
+	wallet.publicKey,
+	solanaWeb3.LAMPORTS_PER_SOL,
+	);
+	await connection.confirmTransaction(airdropSignature);
+	// get account info
+	// account data is bytecode that needs to be deserialized
+	// serialization and deserialization is program specic
+	let account = await connection.getAccountInfo(wallet.publicKey);
+
     setAccount({ address, balance });
-
-
-var connection = new solanaWeb3.Connection(
-solanaWeb3.clusterApiUrl('devnet'),
-'confirmed',
-);
-
-
-
-var wallet = solanaWeb3.Keypair.generate();
-var airdropSignature = await connection.requestAirdrop(
-wallet.publicKey,
-solanaWeb3.LAMPORTS_PER_SOL,
-);
-
-
-await connection.confirmTransaction(airdropSignature);
-
-
-
-// get account info
-// account data is bytecode that needs to be deserialized
-// serialization and deserialization is program specic
-let account = await connection.getAccountInfo(wallet.publicKey);
-return connection;
+    setEthAddress(address);
+    setCluster(connection);
+    setSolanaWallet(wallet);
+    setSolanaAccount(account);
 };
-//may want to return wallet, connection, account, address, ballance
 
 
 
