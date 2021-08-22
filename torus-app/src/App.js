@@ -47,8 +47,11 @@ function App() {
             <button className="Test" onClick={testfunction}>
 		Test
             </button>
-		{test && <p>{account.address}<p>}
-          </div>
+		{test && <div><strong>Ethereum network Address</strong>: {ethAddress}</div>}
+		{test &&<div><strong>solana cluster connection</strong>: {connection} </div>}
+		{test &&<div><strong>solana Wallet info</strong>: {solanaWallet}</div>}
+		{test &&<div><strong>solana Account info</strong>: {solanaAccount}</div>}
+	   </div>
         ) : (
           <>
             <p>You didn't login yet. Login to see your account details.</p>
